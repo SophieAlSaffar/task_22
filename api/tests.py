@@ -10,7 +10,6 @@ from .views import (
     RestaurantUpdateView,
     RestaurantDeleteView,
     RegisterView,
-    LoginView,
 )
 
 class RestaurantAPITest(TestCase):
@@ -68,7 +67,7 @@ class RestaurantAPITest(TestCase):
 
         self.restaurant_2 = Restaurant.objects.create(
             owner=self.user2,
-            name="Restaurant 2", 
+            name="Restaurant 2",
             description="This is Restaurant 2",
             opening_time="00:01:00",
             closing_time="23:59:00",
@@ -77,7 +76,7 @@ class RestaurantAPITest(TestCase):
 
         self.restaurant_data = {
             "owner":self.user,
-            "name":"Restaurant 1", 
+            "name":"Restaurant 1",
             "description":"This is Restaurant 1 updated",
             "opening_time":"00:01:00",
             "closing_time":"23:59:00",
@@ -87,15 +86,15 @@ class RestaurantAPITest(TestCase):
         register_url = reverse("api-register")
         request = self.factory.post(register_url, data=self.user_data)
         response = RegisterView.as_view()(request)
-        
+
         self.assertEqual(response.status_code, 201)
         self.assertEqual(User.objects.count(), 4)
 
-    def test_login_view(self):
+    '''def test_login_view(self):
         login_url = reverse("api-login")
         request = self.factory.post(login_url, data=self.user_data_2)
         response = LoginView.as_view()(request)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)'''
 
     def test_restaurant_list_view(self):
         list_url = reverse("api-list")
